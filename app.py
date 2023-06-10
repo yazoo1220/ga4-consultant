@@ -168,7 +168,9 @@ prompt = PromptTemplate(
     You are a very helpful consultant who knows everything about GA4 (Google analytics). 
     Based on the following chat_history, Please reply to the question in format of markdown. 
     history: {chat_history}. question: {input}
-    
+    ''')
+
+prefix = '''
     answer example:
     ### 分析:
     1. "Silver Bracelet"（SKU_12345）は1000回閲覧され、200回カートに追加され、100回購入されました。閲覧からカート追加までのコンバージョン率は20%、カート追加から購入までのコンバージョン率は50%です。
@@ -186,7 +188,7 @@ prompt = PromptTemplate(
 
     6. **クロスセル・アップセルの機会**：Silver Braceletを閲覧または購入したユーザーに対して、関連商品やアクセサリーのカテゴリー内の高価格商品を推奨するなどのクロスセルやアップセルの戦略を検討します。
     '''
-)
+
 
 class SimpleStreamlitCallbackHandler(BaseCallbackHandler):
     """ Copied only streaming part from StreamlitCallbackHandler """
@@ -221,11 +223,8 @@ def format_action(action, result):
 
 if ask_button:
     with st.spinner('typing...'):
-        prefix = f'すべて日本語で回答してください'
         handler = SimpleStreamlitCallbackHandler()
         response = agent({"input":user_input}) #,"callbacks":handler})
-        
-        
         actions = response['intermediate_steps']
         actions_list = []
         for action, result in actions:
