@@ -85,9 +85,8 @@ if st.session_state.starter:
         H --> I[現在使用している主な広告戦略は何ですか？]
         I --> J[重要なユーザーセグメントは何ですか？]
 
-    まずはあなたがどのように役に立てるのか説明したあと、サイトの目的をヒアリングすることから始めます。
+    まずはあなたがどのように役に立てるのか説明したあと、サイトの目的をヒアリングしてください。
     質問は必ず一つずつです。重要なので忘れないでください。
-    開始。
 
     '''
 
@@ -165,7 +164,28 @@ state = get_state()
 
 prompt = PromptTemplate(
     input_variables=["chat_history","input"], 
-    template='You are a very helpful consultant who knows everything about GA4 (Google analytics). Based on the following chat_history, Please reply to the question in format of markdown. history: {chat_history}. question: {input}'
+    template='''
+    You are a very helpful consultant who knows everything about GA4 (Google analytics). 
+    Based on the following chat_history, Please reply to the question in format of markdown. 
+    history: {chat_history}. question: {input}
+    
+    answer example:
+    ### 分析:
+    1. "Silver Bracelet"（SKU_12345）は1000回閲覧され、200回カートに追加され、100回購入されました。閲覧からカート追加までのコンバージョン率は20%、カート追加から購入までのコンバージョン率は50%です。
+    2. 一方、"Another Item Name"（SKU_67890）は800回閲覧され、250回カートに追加され、150回購入されました。閲覧からカート追加までのコンバージョン率は31.25%、カート追加から購入までのコンバージョン率は60%です。
+    #### 次のアクション：
+    1. **商品詳細ページの最適化**：Silver Braceletの閲覧からカート追加までのコンバージョン率がSKU_67890よりも低いことから、Silver Braceletの商品詳細ページには改善の余地がある可能性があります。商品の説明、画像、レビュー等のユーザーエクスペリエンスを向上させるための改善を検討します。
+
+    2. **チェックアウトプロセスの最適化**：両商品ともカート追加から購入までのコンバージョン率が50%〜60%となっています。この数字は比較的高いですが、カート放棄を減らすためにチェックアウトプロセスの簡素化や、再購入を促すためのリマーケティングキャンペーンなどを検討します。
+
+    3. **在庫管理**：SKU_67890の方が売れ行きが良いため、この商品の在庫が十分にあるか確認します。また、Silver Braceletの売れ行きが低い場合、プロモーションを行うか、在庫を減らす等の対策を考えます。
+
+    4. **マーケティング活動**：閲覧数が高い商品はユーザーの関心が高いと考えられます。そのため、Silver Braceletのマーケティング活動を強化することを検討します。具体的には、ターゲットユーザーに対してSilver Braceletをフィーチャーしたメールマーケティングキャンペーンを行ったり、SNS広告でSilver Braceletを強調したりするなどです。
+
+    5. **価格戦略の再評価**：Silver Braceletが閲覧はされているものの、カート追加率が低い場合、価格が高すぎて購買に至らない可能性があります。競合他社の価格と比較して、適切な価格設定を再評価することを検討します。
+
+    6. **クロスセル・アップセルの機会**：Silver Braceletを閲覧または購入したユーザーに対して、関連商品やアクセサリーのカテゴリー内の高価格商品を推奨するなどのクロスセルやアップセルの戦略を検討します。
+    '''
 )
 
 class SimpleStreamlitCallbackHandler(BaseCallbackHandler):
