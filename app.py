@@ -130,7 +130,7 @@ if "past" not in st.session_state:
     
 from langchain.agents import load_tools, initialize_agent, AgentType, Tool, tool
 import pandas as pd
-from langchain.agents import create_pandas_dataframe_agent
+import create_pandas_dataframe_agent
 from langchain.memory import ConversationBufferMemory
 from langchain import PromptTemplate
 from langchain.callbacks.base import BaseCallbackHandler
@@ -205,7 +205,7 @@ class SimpleStreamlitCallbackHandler(BaseCallbackHandler):
 ask_button = ""
 
 if df.shape[0] > 0:
-    agent = create_pandas_dataframe_agent(OpenAI(temperature=0.5), prefix=prefix, df=df, memory=state['memory'], verbose=True, return_intermediate_steps=True,handle_parsing_errors=True)
+    agent = create_pandas_dataframe_agent(ChatOpenAI(temperature=0.5, model_name='gpt-4'), prefix=prefix, df=df, memory=state['memory'], verbose=True, return_intermediate_steps=True,handle_parsing_errors=True)
     user_input = get_text()
     ask_button = analysis_tab.button('ask')
 else:
