@@ -1,5 +1,6 @@
 import streamlit as st
-from langchain. chat_models import ChatOpenAI
+from langchain.chat_models import ChatOpenAI
+from langchain.llms import OpenAI
 from langchain import PromptTemplate
 from langchain.callbacks.base import BaseCallbackHandler
 from langchain.schema import (
@@ -182,7 +183,7 @@ class SimpleStreamlitCallbackHandler(BaseCallbackHandler):
 ask_button = ""
 
 if df.shape[0] > 0:
-    agent = create_pandas_dataframe_agent(ChatOpenAI(temperature=0, model_name='gpt-4'), df, memory=state['memory'], verbose=True, return_intermediate_steps=True,handle_parsing_errors=True)
+    agent = create_pandas_dataframe_agent(OpenAI(temperature=0.5), df, memory=state['memory'], verbose=True, return_intermediate_steps=True,handle_parsing_errors=True)
     user_input = get_text()
     ask_button = analysis_tab.button('ask')
 else:
