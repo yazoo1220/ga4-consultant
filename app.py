@@ -46,7 +46,7 @@ class SimpleStreamlitCallbackHandler(BaseCallbackHandler):
 
 handler = SimpleStreamlitCallbackHandler()
 
-if state.memory == '': 
+if state['memory'] == '': 
     pre_start = '''
     あなたはウェブサイトコンサルです。
     このフローに則ってイベント設定の具体的な方法(どのページでどのボタンを押すかというレベル)を教えてください。
