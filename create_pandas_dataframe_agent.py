@@ -173,7 +173,7 @@ def create_pandas_dataframe_agent(
     tool_names = [tool.name for tool in tools]
     agent = initialize_agent(
         tools,
-        llm_chain=llm_chain,
+        llm=llm,
         agent=AgentType.CHAT_ZERO_SHOT_REACT_DESCRIPTION,
         callback_manager=callback_manager,
         callbacks=callbacks,
