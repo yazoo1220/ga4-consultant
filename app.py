@@ -74,7 +74,7 @@ graph TD
 
 '''
 
-chat = ChatOpenAI(streaming=True, temperature=0.9)
+chat = ChatOpenAI(streaming=True, model_name='gpt-4', temperature=0.9)
 conversation = ConversationChain(
     llm=chat, 
     prompt=prompt,
