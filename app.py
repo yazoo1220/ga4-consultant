@@ -208,12 +208,8 @@ if ask_button:
             actions_list.append(text)
             
         answer = json.dumps(response['output'],ensure_ascii=False).replace('"', '')
-        if language == 'English':
-            with analysis_tab.expander('ℹ️ Show details', expanded=False):
-                analysis_tab.write('\n'.join(actions_list))
-        else:
-            with analysis_tab.expander('ℹ️ 詳細を見る', expanded=False):
-                analysis_tab.write('\n'.join(actions_list))
+        with analysis_tab.expander('ℹ️ 詳細を見る', expanded=False):
+            analysis_tab.write('\n'.join(actions_list))
             
         st.session_state.past.append(user_input)
         st.session_state.generated.append(answer)
