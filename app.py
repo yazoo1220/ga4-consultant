@@ -14,6 +14,9 @@ st.header("Balencer GA4コンサル")
 st.subheader("イベント設定・レポート分析")
 
 # event setting consultation
+
+if "first_reply" not in st.session_state:
+    st.session_state.first_reply = false
                                   
 def get_state(): 
      if "state" not in st.session_state: 
@@ -86,6 +89,7 @@ if not state['memory']:
         memory=state['memory']            
     )
     res = conversation.predict(input=pre_start, callbacks=[handler])
+    st.session_state.first_reply = True
 
 if ask:
     res_box = setting_tab.empty()
