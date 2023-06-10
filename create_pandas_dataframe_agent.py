@@ -1,7 +1,7 @@
 """Agent for working with pandas objects."""
 from typing import Any, Dict, List, Optional, Tuple
 
-from langchain.agents.agent import AgentExecutor
+from langchain.agents.agent import AgentExecutor, initialize_agent, AgentType
 from langchain.agents.agent_toolkits.pandas.prompt import (
     MULTI_DF_PREFIX,
     PREFIX,
@@ -10,7 +10,6 @@ from langchain.agents.agent_toolkits.pandas.prompt import (
     SUFFIX_WITH_MULTI_DF,
 )
 from langchain.agents.mrkl.base import ZeroShotAgent
-from langchain.agents import AgentType
 from langchain.base_language import BaseLanguageModel
 from langchain.callbacks.base import BaseCallbackManager
 from langchain.chains.llm import LLMChain
@@ -171,9 +170,10 @@ def create_pandas_dataframe_agent(
         callback_manager=callback_manager,
     )
     tool_names = [tool.name for tool in tools]
-    agent = AgentType.CHAT_ZERO_SHOT_REACT_DESCRIPTION(
+    agent = initialize_agent(
+        tools,
         llm_chain=llm_chain,
-        allowed_tools=tool_names,
+        agent=AgentType.CHAT_ZERO_SHOT_REACT_DESCRIPTION
         callback_manager=callback_manager,
         callbacks=callbacks,
         handle_parsing_errors=True,
