@@ -77,7 +77,7 @@ graph TD
 chat = ChatOpenAI(streaming=True, temperature=0.9)
 conversation = ConversationChain(
     llm=chat, 
-    prompt=pompt,
+    prompt=prompt,
     memory=state['memory']            
 )
 res = conversation.predict(input=pre_start, callbacks=[handler])
