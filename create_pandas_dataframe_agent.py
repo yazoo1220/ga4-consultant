@@ -16,6 +16,7 @@ from langchain.callbacks.base import BaseCallbackManager
 from langchain.chains.llm import LLMChain
 from langchain.prompts.base import BasePromptTemplate
 from langchain.tools.python.tool import PythonAstREPLTool
+from langchain.callbacks.base import BaseCallbackHandler
 
 
 def _get_multi_prompt(
