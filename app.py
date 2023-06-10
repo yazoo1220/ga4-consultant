@@ -46,7 +46,7 @@ class SimpleStreamlitCallbackHandler(BaseCallbackHandler):
     """ Copied only streaming part from StreamlitCallbackHandler """
     
     def __init__(self) -> None:
-        self.tokens_area = st.empty()
+        self.tokens_area = setting_tab.empty()
         self.tokens_stream = ""
         
     def on_llm_new_token(self, token: str, **kwargs: Any) -> None:
@@ -86,7 +86,8 @@ if st.session_state.starter:
         I --> J[重要なユーザーセグメントは何ですか？]
 
     まずはあなたがどのように役に立てるのか説明したあと、サイトの目的をヒアリングしてください。
-    質問は必ず一つずつです。重要なので忘れないでください。
+    それ以外のことはメッセージに含めないでください。
+    質問は必ず一つのメッセージに一つです。重要なので忘れないでください。
 
     '''
 
