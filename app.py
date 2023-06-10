@@ -77,10 +77,10 @@ graph TD
 chat = ChatOpenAI(streaming=True, temperature=0.9)
 conversation = ConversationChain(
     llm=chat, 
-    prompt=pre_start,
+    prompt=pompt,
     memory=state['memory']            
 )
-res = conversation.predict(input=user_input, callbacks=[handler])
+res = conversation.predict(input=pre_start, callbacks=[handler])
 
 if ask:
     res_box = setting_tab.empty()
