@@ -203,7 +203,7 @@ class SimpleStreamlitCallbackHandler(BaseCallbackHandler):
 ask_button = ""
 
 if df.shape[0] > 0:
-    agent = create_pandas_dataframe_agent(OpenAI(temperature=0.5), df, memory=state['memory'], verbose=True, return_intermediate_steps=True,handle_parsing_errors=True)
+    agent = create_pandas_dataframe_agent(OpenAI(temperature=0.5), prompt=prompt, df, memory=state['memory'], verbose=True, return_intermediate_steps=True,handle_parsing_errors=True)
     user_input = get_text()
     ask_button = analysis_tab.button('ask')
 else:
@@ -220,8 +220,6 @@ def format_action(action, result):
     return f"{action_fields}\nResult: {result}\n"
 
 if ask_button:
-#     res_box = st.empty()
-    st.write("Input:", user_input)
     with st.spinner('typing...'):
         prefix = f'すべて日本語で回答してください'
         handler = SimpleStreamlitCallbackHandler()
