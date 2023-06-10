@@ -16,7 +16,7 @@ st.subheader("イベント設定・レポート分析")
 # event setting consultation
 
 if "first_reply" not in st.session_state:
-    st.session_state.first_reply = false
+    st.session_state.first_reply = False
                                   
 def get_state(): 
      if "state" not in st.session_state: 
