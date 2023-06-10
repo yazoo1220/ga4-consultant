@@ -12,9 +12,7 @@ from typing import Any, Dict, List
 
 st.header("Balencer GA4コンサル")
 st.subheader("イベント設定・レポート分析")
-reset=st.button('reset')
-if reset:
-    st.session_state.starter = True
+
 
 # event setting consultation
 
