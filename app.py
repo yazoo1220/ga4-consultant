@@ -76,7 +76,7 @@ graph TD
 
 if ask:
     res_box = setting_tab.empty()
-    with setting_tab.spinner('typing...'):
+    with st.spinner('typing...'):
         report = []
         chat = ChatOpenAI(streaming=True, temperature=0.9)
         conversation = ConversationChain(
