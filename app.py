@@ -12,6 +12,9 @@ from typing import Any, Dict, List
 
 st.header("Balencer GA4コンサル")
 st.subheader("イベント設定・レポート分析")
+reset=st.button('reset')
+if reset:
+    st.session_state.starter = True
 
 # event setting consultation
 
@@ -33,7 +36,12 @@ prompt = PromptTemplate(
 
 user_input = setting_tab.text_input("You: ",placeholder = "Ask me anything ...")
 ask = setting_tab.button('ask',type='primary')
+reset=st.button('reset')
+if reset:
+    st.session_state.starter = True
+    
 setting_tab.markdown("----")
+
 
 class SimpleStreamlitCallbackHandler(BaseCallbackHandler):
     """ Copied only streaming part from StreamlitCallbackHandler """
