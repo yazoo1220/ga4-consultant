@@ -77,12 +77,12 @@ if st.session_state.starter:
         I --> J[重要なユーザーセグメントは何ですか？]
 
     まずはあなたがどのように役に立てるのか説明したあと、サイトの目的をヒアリングすることから始めます。
-    質問は必ず一つずつです。
-    それでは開始しましょう。
+    質問は必ず一つずつです。重要なので忘れないでください。
+    開始。
 
     '''
 
-    chat = ChatOpenAI(streaming=True, model_name='gpt-4', temperature=0.9)
+    chat = ChatOpenAI(streaming=True, model_name='gpt-4', temperature=0.5)
     conversation = ConversationChain(
         llm=chat, 
         prompt=prompt,
