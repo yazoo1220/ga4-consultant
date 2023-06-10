@@ -203,7 +203,7 @@ class SimpleStreamlitCallbackHandler(BaseCallbackHandler):
 ask_button = ""
 
 if df.shape[0] > 0:
-    agent = create_pandas_dataframe_agent(OpenAI(temperature=0.5), prompt=prompt, df, memory=state['memory'], verbose=True, return_intermediate_steps=True,handle_parsing_errors=True)
+    agent = create_pandas_dataframe_agent(OpenAI(temperature=0.5), prefix=prompt, df, memory=state['memory'], verbose=True, return_intermediate_steps=True,handle_parsing_errors=True)
     user_input = get_text()
     ask_button = analysis_tab.button('ask')
 else:
