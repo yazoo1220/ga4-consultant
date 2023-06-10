@@ -117,8 +117,6 @@ if "past" not in st.session_state:
     
     
 from langchain.agents import load_tools, initialize_agent, AgentType, Tool, tool
-from langchain.chat_models import ChatOpenAI
-from langchain.llms import OpenAI
 import pandas as pd
 from langchain.agents import create_pandas_dataframe_agent
 from langchain.memory import ConversationBufferMemory
@@ -172,7 +170,7 @@ class SimpleStreamlitCallbackHandler(BaseCallbackHandler):
 ask_button = ""
 
 if df.shape[0] > 0:
-    agent = create_pandas_dataframe_agent(OpenAI(temperature=0, max_tokens=1000), df, memory=state['memory'], verbose=True, return_intermediate_steps=True)
+    agent = create_pandas_dataframe_agent(ChatOpenAI(temperature=0, model_name='gpt-4'), df, memory=state['memory'], verbose=True, return_intermediate_steps=True)
     user_input = get_text()
     ask_button = analysis_tab.button('ask')
 else:
@@ -208,8 +206,8 @@ if ask_button:
             actions_list.append(text)
             
         answer = json.dumps(response['output'],ensure_ascii=False).replace('"', '')
-        with analysis_tab.expander('ℹ️ 詳細を見る', expanded=False):
-            analysis_tab.write('\n'.join(actions_list))
+        with st.expander('ℹ️ 詳細を見る', expanded=False):
+            st.write('\n'.join(actions_list))
             
         st.session_state.past.append(user_input)
         st.session_state.generated.append(answer)
