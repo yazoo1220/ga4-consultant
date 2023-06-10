@@ -15,8 +15,8 @@ st.subheader("イベント設定・レポート分析")
 
 # event setting consultation
 
-if "first_reply" not in st.session_state:
-    st.session_state.first_reply = False
+if "starter" not in st.session_state:
+    st.session_state.starter = True
                                   
 def get_state(): 
      if "state" not in st.session_state: 
@@ -49,7 +49,7 @@ class SimpleStreamlitCallbackHandler(BaseCallbackHandler):
 
 handler = SimpleStreamlitCallbackHandler()
 st.write(state)
-if not state['memory']: 
+if st.session_state.starter: 
     pre_start = '''
     あなたはウェブサイトコンサルです。
     このフローに則ってイベント設定の具体的な方法(どのページでどのボタンを押すかというレベル)を教えてください。
@@ -89,7 +89,7 @@ if not state['memory']:
         memory=state['memory']            
     )
     res = conversation.predict(input=pre_start, callbacks=[handler])
-    st.session_state.first_reply = True
+    st.session_state.starter = False
 
 if ask:
     res_box = setting_tab.empty()
