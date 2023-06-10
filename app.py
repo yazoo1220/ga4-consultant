@@ -46,7 +46,7 @@ class SimpleStreamlitCallbackHandler(BaseCallbackHandler):
 
 handler = SimpleStreamlitCallbackHandler()
 
-prefix = '''
+pre_start = '''
 あなたはウェブサイトコンサルです。
 このフローに則ってイベント設定の具体的な方法(どのページでどのボタンを押すかというレベル)を教えてください。
 
@@ -73,6 +73,14 @@ graph TD
 それでは開始しましょう。
 
 '''
+
+chat = ChatOpenAI(streaming=True, temperature=0.9)
+conversation = ConversationChain(
+    llm=chat, 
+    prompt=pre_start,
+    memory=state['memory']            
+)
+res = conversation.predict(input=user_input, callbacks=[handler])
 
 if ask:
     res_box = setting_tab.empty()
