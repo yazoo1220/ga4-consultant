@@ -46,45 +46,46 @@ class SimpleStreamlitCallbackHandler(BaseCallbackHandler):
 
 handler = SimpleStreamlitCallbackHandler()
 
-pre_start = '''
-あなたはウェブサイトコンサルです。
-このフローに則ってイベント設定の具体的な方法(どのページでどのボタンを押すかというレベル)を教えてください。
+if "state" not in st.session_state: 
+    pre_start = '''
+    あなたはウェブサイトコンサルです。
+    このフローに則ってイベント設定の具体的な方法(どのページでどのボタンを押すかというレベル)を教えてください。
 
-重要！！この内容は忘れないでください。
--必ず質問は一つずつにしてください。
--答えが曖昧で次にどう進めば不確かな場合は質問を言い換えたり、具体的な回答例を提示するなどして聞き直してください。
--質問攻めにしないよう、フレンドリーかつサポーティブな姿勢で聞いてください。
--このフローチャートについては触れないでください
--あなたがaiであることも触れないでください
+    重要！！この内容は忘れないでください。
+    -必ず質問は一つずつにしてください。
+    -答えが曖昧で次にどう進めば不確かな場合は質問を言い換えたり、具体的な回答例を提示するなどして聞き直してください。
+    -質問攻めにしないよう、フレンドリーかつサポーティブな姿勢で聞いてください。
+    -このフローチャートについては触れないでください
+    -あなたがaiであることも触れないでください
 
-graph TD
-    A[サイトの目的は何ですか？]
-    A -->|製品の販売| B[提供している主な製品は何ですか？]
-    A -->|情報提供| C[ユーザーが最も頻繁に閲覧するコンテンツは何ですか？]
-    A -->|ブランドの認知度向上| D[主なブランドイメージやメッセージは何ですか？]
-    B --> E[ユーザーが最も頻繁に行う行動は何ですか？]
-    C --> E
-    D --> E
-    E -->|商品の閲覧・購入| F[最も重要と考えているコンバージョンは何ですか？]
-    E -->|問い合わせ・情報探求| G[最も重要と考えているコンバージョンは何ですか？]
-    F --> H[成功を測定するための主な指標は何ですか？]
-    G --> H
-    H --> I[現在使用している主な広告戦略は何ですか？]
-    I --> J[重要なユーザーセグメントは何ですか？]
+    graph TD
+        A[サイトの目的は何ですか？]
+        A -->|製品の販売| B[提供している主な製品は何ですか？]
+        A -->|情報提供| C[ユーザーが最も頻繁に閲覧するコンテンツは何ですか？]
+        A -->|ブランドの認知度向上| D[主なブランドイメージやメッセージは何ですか？]
+        B --> E[ユーザーが最も頻繁に行う行動は何ですか？]
+        C --> E
+        D --> E
+        E -->|商品の閲覧・購入| F[最も重要と考えているコンバージョンは何ですか？]
+        E -->|問い合わせ・情報探求| G[最も重要と考えているコンバージョンは何ですか？]
+        F --> H[成功を測定するための主な指標は何ですか？]
+        G --> H
+        H --> I[現在使用している主な広告戦略は何ですか？]
+        I --> J[重要なユーザーセグメントは何ですか？]
 
-まずはあなたがどのように役に立てるのか説明したあと、サイトの目的をヒアリングすることから始めます。
-質問は必ず一つずつです。
-それでは開始しましょう。
+    まずはあなたがどのように役に立てるのか説明したあと、サイトの目的をヒアリングすることから始めます。
+    質問は必ず一つずつです。
+    それでは開始しましょう。
 
-'''
+    '''
 
-chat = ChatOpenAI(streaming=True, model_name='gpt-4', temperature=0.9)
-conversation = ConversationChain(
-    llm=chat, 
-    prompt=prompt,
-    memory=state['memory']            
-)
-res = conversation.predict(input=pre_start, callbacks=[handler])
+    chat = ChatOpenAI(streaming=True, model_name='gpt-4', temperature=0.9)
+    conversation = ConversationChain(
+        llm=chat, 
+        prompt=prompt,
+        memory=state['memory']            
+    )
+    res = conversation.predict(input=pre_start, callbacks=[handler])
 
 if ask:
     res_box = setting_tab.empty()
@@ -97,8 +98,6 @@ if ask:
             memory=state['memory']            
         )
         res = conversation.predict(input=user_input, callbacks=[handler])
-    
-setting_tab.markdown("----")
 
 
 # report analysis
