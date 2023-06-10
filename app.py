@@ -48,7 +48,7 @@ class SimpleStreamlitCallbackHandler(BaseCallbackHandler):
         self.tokens_area.markdown(self.tokens_stream)
 
 handler = SimpleStreamlitCallbackHandler()
-st.write(state)
+
 if st.session_state.starter: 
     pre_start = '''
     あなたはウェブサイトコンサルです。
