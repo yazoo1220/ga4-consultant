@@ -45,7 +45,7 @@ class SimpleStreamlitCallbackHandler(BaseCallbackHandler):
         self.tokens_area.markdown(self.tokens_stream)
 
 handler = SimpleStreamlitCallbackHandler()
-
+st.write(state)
 if not state['memory']: 
     pre_start = '''
     あなたはウェブサイトコンサルです。
