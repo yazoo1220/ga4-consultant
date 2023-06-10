@@ -131,7 +131,7 @@ if "past" not in st.session_state:
     
 from langchain.agents import load_tools, initialize_agent, AgentType, Tool, tool
 import pandas as pd
-import create_pandas_dataframe_agent
+from create_pandas_dataframe_agent import create_pandas_dataframe_agent
 from langchain.memory import ConversationBufferMemory
 from langchain import PromptTemplate
 from langchain.callbacks.base import BaseCallbackHandler
