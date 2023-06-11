@@ -246,5 +246,5 @@ if ask_button:
 if st.session_state["generated"]:
 
     for i in range(len(st.session_state["generated"]) - 1, -1, -1):
-        st.markdown('ai: ' + st.session_state["generated"][i])
-        st.markdown('user: ' + st.session_state["past"][i])
+        st.write('ai: ' + st.session_state["generated"][i])
+        st.write('user: ' + st.session_state["past"][i])
